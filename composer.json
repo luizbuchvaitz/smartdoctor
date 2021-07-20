@@ -1,0 +1,13 @@
+{
+    "name": "Smart Doctor",
+    "description": "Sistema De Gestão Clínica",
+    "authors": [
+        {
+            "name": "Luiz",
+            "email": "lzbuchvaitz@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.8"
+    }
+}
