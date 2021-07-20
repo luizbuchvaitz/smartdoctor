@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Doctor | Cadastro</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="white-bg">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div class="m-b-sm">
+            <center>
+                <img alt="image" class="img-circle img-responsive" src="img/logo.png"
+                                                     style="width: 180px">
+            </center>
+        </div>
+        <div>
+            <h3>Faça seu Cadastro</h3>
+            <p>Smart Doctor</p>
+            <p>Cliente: Informe os dados abaixo</p>
+            <form class="m-t" role="form" method="post" action="cadastrese.php">
+                <div class="form-group">
+                    <label class="col-md-1 control-label">CPF</label>
+                    <input id="cdusua" name = "cdusua" type="text" class="form-control" onkeypress="mascara(this, cpf)" placeholder="cpf" required="" maxlength = "14">
+                </div>
+                <div class="form-group">
+                    <label class="col-md-1 control-label">Nome</label>
+                    <input id="deusua" name = "deusua" type="text" class="form-control" placeholder="seu nome" maxlength = "100" required="">
+                </div>
+                <div class="form-group">
+                    <label class="col-md-1 control-label">Telefone</label>
+                    <input id="nrtele" name = "nrtele" type="text" class="form-control" onkeypress="mascara(this, telefone)" maxlength = "15" placeholder="(11) 1234-1234" required="">
+                </div>
+                <div class="form-group">
+                    <label class="col-md-1 control-label">E-mail</label>
+                    <input id="demail" name = "demail" type="email" class="form-control" placeholder="seuemail@seuprovedor.com.br" maxlength = "255" required="">
+                </div>
+                <div class="form-group">
+                    <label class="col-md-1 control-label">Senha</label>
+                    <input id="desenh" name = "desenh" type="password" class="form-control" placeholder="" required="" maxlength = "100">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Salvar</button>
+                <button type="button" onClick="history.go(-1)" class="btn btn-warning block full-width m-b">Retornar</button>
+            </form>
+            <p class="m-t"> <small>Smart Doctor&copy; 2020</small> </p>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+        function mascara(o,f){
+            v_obj=o
+            v_fun=f
+            setTimeout("execmascara()",1)
+        }
+
+        function execmascara(){
+            v_obj.value=v_fun(v_obj.value)
+        }
+
+        function leech(v){
+            v=v.replace(/o/gi,"0")
+            v=v.replace(/i/gi,"1")
+            v=v.replace(/z/gi,"2")
+            v=v.replace(/e/gi,"3")
+            v=v.replace(/a/gi,"4")
+            v=v.replace(/s/gi,"5")
+            v=v.replace(/t/gi,"7")
+            return v
+        }
+
+        function soNumeros(v){
+            return v.replace(/\D/g,"")
+        }
+
+        function celular(v){
+            v=v.replace(/\D/g,"")                 //Remove tudo o que não é dígito
+            //v=v.replace(/^(\d{4})(\d)/,"$1-$2")   //Coloca ponto entre o segundo e o terceiro dígitos
+            v=v.replace(/^(\d\d)(\d)/g,"($1) $2") //Coloca parênteses em volta dos dois primeiros dígitos
+            v=v.replace(/(\d{5})(\d)/,"$1-$2")    //Coloca hífen entre o quarto e o quinto dígitos
+            return v
+        }
+
+        function telefone(v){
+            v=v.replace(/\D/g,"")                 //Remove tudo o que não é dígito
+            //v=v.replace(/^(\d{4})(\d)/,"$1-$2")   //Coloca ponto entre o segundo e o terceiro dígitos
+            v=v.replace(/^(\d\d)(\d)/g,"($1) $2") //Coloca parênteses em volta dos dois primeiros dígitos
+            v=v.replace(/(\d{4})(\d)/,"$1-$2")    //Coloca hífen entre o quarto e o quinto dígitos
+            return v
+        }
+
+        function cpf(v){
+            v=v.replace(/\D/g,"")                    //Remove tudo o que não é dígito
+            v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+            v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+                                                     //de novo (para o segundo bloco de números)
+            v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
+            return v
+        }
+
+        function cep(v){
+            v=v.replace(/D/g,"")                //Remove tudo o que não é dígito
+            v=v.replace(/^(\d{5})(\d)/,"$1-$2") //Coloca hífen entre o quarto e o quinto dígitos
+            return v
+        }
+
+        function cnpj(v){
+            v=v.replace(/\D/g,"")                           //Remove tudo o que não é dígito
+            v=v.replace(/^(\d{2})(\d)/,"$1.$2")             //Coloca ponto entre o segundo e o terceiro dígitos
+            v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3") //Coloca ponto entre o quinto e o sexto dígitos
+            v=v.replace(/\.(\d{3})(\d)/,".$1/$2")           //Coloca uma barra entre o oitavo e o nono dígitos
+            v=v.replace(/(\d{4})(\d)/,"$1-$2")              //Coloca um hífen depois do bloco de quatro dígitos
+            return v
+        }
+
+        function romanos(v){
+            v=v.toUpperCase()             //Maiúsculas
+            v=v.replace(/[^IVXLCDM]/g,"") //Remove tudo o que não for I, V, X, L, C, D ou M
+            //Referência: http://www.diveintopython.org/refactoring/refactoring.html
+            while(v.replace(/^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/,"")!="")
+                v=v.replace(/.$/,"")
+            return v
+        }
+
+        function site(v){
+            //Esse sem comentarios para que você entenda sozinho ;-)
+            v=v.replace(/^http:\/\/?/,"")
+            dominio=v
+            caminho=""
+            if(v.indexOf("/")>-1)
+                dominio=v.split("/")[0]
+                caminho=v.replace(/[^\/]*/,"")
+            dominio=dominio.replace(/[^\w\.\+-:@]/g,"")
+            caminho=caminho.replace(/[^\w\d\+-@:\?&=%\(\)\.]/g,"")
+            caminho=caminho.replace(/([\?&])=/,"$1")
+            if(caminho!="")dominio=dominio.replace(/\.+$/,"")
+            v="http://"+dominio+caminho
+            return v
+        }
+    </script>
+
+</body>
+
+</html>
